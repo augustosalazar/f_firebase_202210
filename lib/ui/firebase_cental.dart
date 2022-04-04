@@ -1,3 +1,6 @@
+import 'package:f_firebase_202210/ui/pages/content_page.dart';
+import 'package:f_firebase_202210/ui/pages/login/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseCentral extends StatelessWidget {
@@ -5,6 +8,14 @@ class FirebaseCentral extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Center(child: Text("FirebaseCentral")));
+    return StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ContentPage();
+          } else {
+            return LoginPage();
+          }
+        });
   }
 }

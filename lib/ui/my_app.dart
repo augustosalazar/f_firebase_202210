@@ -1,3 +1,4 @@
+import 'package:f_firebase_202210/model/controllers/authentication_controller.dart';
 import 'package:f_firebase_202210/ui/firebase_cental.dart';
 import 'package:f_firebase_202210/ui/pages/login/login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
 
                   if (snapshot.connectionState == ConnectionState.done) {
                     // crear los controladores
+                    Get.put(AuthenticationController());
                     return const FirebaseCentral();
                   }
 
