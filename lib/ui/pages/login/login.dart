@@ -1,6 +1,7 @@
-import 'package:f_firebase_202210/model/controllers/authentication_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../controllers/authentication_controller.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -22,8 +23,8 @@ class LoginPage extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: login, child: Text("Login")),
-                ElevatedButton(onPressed: signIn, child: Text("Sign in")),
+                ElevatedButton(onPressed: login, child: const Text("Login")),
+                ElevatedButton(onPressed: signIn, child: const Text("Sign in")),
               ]),
         ),
       ),

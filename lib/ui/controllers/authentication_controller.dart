@@ -6,7 +6,7 @@ class AuthenticationController extends GetxController {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      return Future.value(true);
+      return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return Future.error("User not found");
@@ -20,7 +20,7 @@ class AuthenticationController extends GetxController {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      return Future.value(true);
+      return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         return Future.error("The password is too weak");
@@ -36,5 +36,15 @@ class AuthenticationController extends GetxController {
     } catch (e) {
       return Future.error("Logout error");
     }
+  }
+
+  String userEmail() {
+    String email = FirebaseAuth.instance.currentUser!.email ?? "a@a.com";
+    return email;
+  }
+
+  String getUid() {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    return uid;
   }
 }

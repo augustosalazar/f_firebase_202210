@@ -12,7 +12,7 @@ class FirebaseCentral extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ContentPage();
+            return const ContentPage();
           } else {
             return LoginPage();
           }
