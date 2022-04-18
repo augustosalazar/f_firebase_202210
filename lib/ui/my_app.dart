@@ -2,12 +2,23 @@ import 'package:f_firebase_202210/ui/firebase_cental.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../config/configutarion.dart';
 import 'controllers/authentication_controller.dart';
 import 'controllers/chat_controller.dart';
 import 'controllers/firestore_controller.dart';
 
 class MyApp extends StatelessWidget {
-  final Future<FirebaseApp> _init = Firebase.initializeApp();
+  final Future<FirebaseApp> _init = Firebase.initializeApp(
+    options: FirebaseOptions(
+        apiKey: Configuration.apiKey,
+        authDomain: Configuration.authDomain,
+        databaseURL: Configuration.databaseURL,
+        projectId: Configuration.projectId,
+        storageBucket: Configuration.storageBucket,
+        messagingSenderId: Configuration.messagingSenderId,
+        appId: Configuration.appId,
+        measurementId: Configuration.measurementId),
+  );
 
   MyApp({Key? key}) : super(key: key);
 
