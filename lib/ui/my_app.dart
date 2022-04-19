@@ -1,8 +1,6 @@
 import 'package:f_firebase_202210/ui/firebase_cental.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../config/configutarion.dart';
 import 'controllers/authentication_controller.dart';
 import 'controllers/chat_controller.dart';
 import 'controllers/firestore_controller.dart';
