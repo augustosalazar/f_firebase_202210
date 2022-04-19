@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'controllers/authentication_controller.dart';
 import 'controllers/chat_controller.dart';
 import 'controllers/firestore_controller.dart';
+import 'controllers/user_controller.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     Get.put(FirestoreController());
     Get.put(ChatController());
     Get.put(AuthenticationController());
+    Get.put(UserController());
 
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,

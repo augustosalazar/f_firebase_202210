@@ -5,6 +5,7 @@ import 'package:loggy/loggy.dart';
 
 import '../controllers/authentication_controller.dart';
 import '../widgets/chat_page.dart';
+import '../widgets/user_list.dart';
 
 class ContentPage extends StatefulWidget {
   const ContentPage({Key? key}) : super(key: key);
@@ -18,7 +19,8 @@ class _ContentPageState extends State<ContentPage> {
   AuthenticationController authenticationController = Get.find();
   static final List<Widget> _widgets = <Widget>[
     const FireStorePage(),
-    const ChatPage()
+    const ChatPage(),
+    const UserList()
   ];
 
   _onItemTapped(int index) {
@@ -51,7 +53,8 @@ class _ContentPageState extends State<ContentPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Firestore"),
-          BottomNavigationBarItem(icon: Icon(Icons.business), label: "Chat")
+          BottomNavigationBarItem(icon: Icon(Icons.business), label: "Chat"),
+          BottomNavigationBarItem(icon: Icon(Icons.assistant), label: "Users")
         ],
         type: BottomNavigationBarType.shifting,
         currentIndex: _selectIndex,
