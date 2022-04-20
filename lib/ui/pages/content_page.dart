@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:f_firebase_202210/ui/widgets/firestore_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,23 +45,41 @@ class _ContentPageState extends State<ContentPage> {
           title: Text("Welcome ${authenticationController.userEmail()}"),
           actions: [
             IconButton(
-                icon: const Icon(Icons.exit_to_app),
+                icon: const Icon(
+                  Icons.exit_to_app,
+                  size: 30,
+                ),
                 onPressed: () {
                   _logout();
                 }),
           ]),
       body: _widgets.elementAt(_selectIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Firestore"),
-          BottomNavigationBarItem(icon: Icon(Icons.business), label: "Chat"),
-          BottomNavigationBarItem(icon: Icon(Icons.assistant), label: "Users")
+      bottomNavigationBar: CurvedNavigationBar(
+        items: const <Widget>[
+          Icon(
+            Icons.home,
+            size: 35,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.business,
+            size: 35,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.accessibility,
+            size: 35,
+            color: Colors.white,
+          ),
         ],
-        type: BottomNavigationBarType.shifting,
-        currentIndex: _selectIndex,
-        iconSize: 40,
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Colors.amber[200],
+        height: 60,
+        letIndexChange: (index) => true,
+        color: Theme.of(context).colorScheme.primary,
+        buttonBackgroundColor: const Color(0xFFF6A641),
+        backgroundColor: Colors.transparent.withOpacity(0),
+        index: _selectIndex,
+        animationCurve: Curves.easeInOut,
+        animationDuration: const Duration(milliseconds: 170),
         onTap: _onItemTapped,
       ),
     );

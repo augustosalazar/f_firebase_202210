@@ -113,8 +113,11 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) => _scrollToEnd());
-    return Column(
-      children: [Expanded(flex: 4, child: _list()), _textInput()],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 25.0),
+      child: Column(
+        children: [Expanded(flex: 4, child: _list()), _textInput()],
+      ),
     );
   }
 }
