@@ -10,7 +10,7 @@ class AppUser {
   AppUser.fromJson(DataSnapshot snapshot, Map<dynamic, dynamic> json)
       : key = snapshot.key ?? "0",
         email = json['email'] ?? "email",
-        uid = json['email'] ?? "email";
+        uid = json['uid'] ?? "uid";
 
   toJson() {
     return {

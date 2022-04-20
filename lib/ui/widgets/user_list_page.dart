@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 
 import '../../data/model/app_user.dart';
 
-class UserList extends StatefulWidget {
-  const UserList({Key? key}) : super(key: key);
+class UserListPage extends StatefulWidget {
+  const UserListPage({Key? key}) : super(key: key);
 
   @override
-  State<UserList> createState() => _UserListState();
+  State<UserListPage> createState() => _UserListPageState();
 }
 
-class _UserListState extends State<UserList> {
+class _UserListPageState extends State<UserListPage> {
   UserController userController = Get.find();
 
   @override
@@ -31,24 +31,30 @@ class _UserListState extends State<UserList> {
     return _list();
   }
 
-  Widget _item(AppUser element, int posicion) {
+  Widget _item(AppUser element) {
     return Card(
       margin: const EdgeInsets.all(4.0),
       child: ListTile(
         title: Text(
           element.email,
         ),
+        subtitle: Text(element.uid),
       ),
     );
   }
 
   Widget _list() {
     return GetX<UserController>(builder: (controller) {
+      if (userController.users.length == 0) {
+        return const Center(
+          child: Text('No users'),
+        );
+      }
       return ListView.builder(
         itemCount: userController.users.length,
         itemBuilder: (context, index) {
           var element = userController.users[index];
-          return _item(element, index);
+          return _item(element);
         },
       );
     });

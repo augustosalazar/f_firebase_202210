@@ -6,7 +6,7 @@ import 'package:loggy/loggy.dart';
 
 import '../controllers/authentication_controller.dart';
 import '../widgets/chat_page.dart';
-import '../widgets/user_list.dart';
+import '../widgets/user_list_page.dart';
 
 class ContentPage extends StatefulWidget {
   const ContentPage({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _ContentPageState extends State<ContentPage> {
   static final List<Widget> _widgets = <Widget>[
     const FireStorePage(),
     const ChatPage(),
-    const UserList()
+    const UserListPage()
   ];
 
   _onItemTapped(int index) {

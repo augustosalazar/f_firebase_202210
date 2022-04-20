@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:f_firebase_202210/ui/controllers/authentication_controller.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
+import 'package:loggy/loggy.dart';
 import '../../data/model/app_user.dart';
 
 class UserController extends GetxController {
-  var users = <AppUser>[].obs;
+  var _users = <AppUser>[].obs;
 
   final databaseRef = FirebaseDatabase.instance.ref();
 
@@ -12,8 +14,17 @@ class UserController extends GetxController {
 
   late StreamSubscription<DatabaseEvent> updateEntryStreamSubscription;
 
+  get users {
+    AuthenticationController authenticationController = Get.find();
+    return _users
+        .where((entry) => entry.uid != authenticationController.getUid())
+        .toList();
+  }
+
+  get allUsers => _users;
+
   void start() {
-    users.clear();
+    _users.clear();
 
     newEntryStreamSubscription =
         databaseRef.child("userList").onChildAdded.listen(_onEntryAdded);
@@ -29,15 +40,28 @@ class UserController extends GetxController {
 
   _onEntryAdded(DatabaseEvent event) {
     final json = event.snapshot.value as Map<dynamic, dynamic>;
-    users.add(AppUser.fromJson(event.snapshot, json));
+    _users.add(AppUser.fromJson(event.snapshot, json));
   }
 
   _onEntryChanged(DatabaseEvent event) {
-    var oldEntry = users.singleWhere((entry) {
+    var oldEntry = _users.singleWhere((entry) {
       return entry.key == event.snapshot.key;
     });
 
     final json = event.snapshot.value as Map<dynamic, dynamic>;
-    users[users.indexOf(oldEntry)] = AppUser.fromJson(event.snapshot, json);
+    _users[_users.indexOf(oldEntry)] = AppUser.fromJson(event.snapshot, json);
+  }
+
+  Future<void> createUser(email, uid) async {
+    logInfo("Creating user in realTime for $email and $uid");
+    try {
+      await databaseRef
+          .child('userList')
+          .push()
+          .set({'email': email, 'uid': uid});
+    } catch (error) {
+      logError(error);
+      return Future.error(error);
+    }
   }
 }
