@@ -1,4 +1,3 @@
-import 'package:f_firebase_202210/config/configurarion.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loggy/loggy.dart';
