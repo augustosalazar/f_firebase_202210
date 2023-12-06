@@ -24,7 +24,7 @@ class FirebaseRealTimeDatabaseDataSource {
           }
         })
         .map((messages) => messages.entries
-            .map((entry) => Message.fromJsonSimple(entry.value))
+            .map((entry) => Message.fromJson(entry.value))
             .toList())
         .transform<List<Message>>(StreamTransformer.fromHandlers(
           handleData: (data, sink) {
