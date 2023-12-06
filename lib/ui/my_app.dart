@@ -1,6 +1,9 @@
+import 'package:f_firebase_202210/domain/use_cases/chat_use_case.dart';
 import 'package:f_firebase_202210/ui/firebase_cental.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../data/data_source/firebase_real_time_database_chat_data_source.dart';
+import '../data/repositories/chat_reposity.dart';
 import 'controllers/authentication_controller.dart';
 import 'controllers/chat_controller.dart';
 import 'controllers/firestore_controller.dart';
@@ -12,6 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(FirestoreController());
+
+    Get.put(FirebaseRealTimeDatabaseDataSource());
+    Get.put(ChatRepository(Get.find()));
+    Get.put(ChatUseCase(Get.find()));
+
     Get.put(ChatController());
     Get.put(AuthenticationController());
     Get.put(UserController());

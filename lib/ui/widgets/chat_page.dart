@@ -36,7 +36,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _item(Message element, int posicion, String uid) {
-    logInfo('Current user? -> ${uid == element.user} msg -> ${element.text}');
+    logInfo('Current user? -> ${uid == element.user}  ${element.textMessage}');
     return Card(
       margin: const EdgeInsets.all(4.0),
       color: uid == element.user ? Colors.yellow[200] : Colors.grey[300],
@@ -44,7 +44,7 @@ class _ChatPageState extends State<ChatPage> {
         onTap: () => chatController.updateMsg(element),
         onLongPress: () => chatController.deleteMsg(element, posicion),
         title: Text(
-          element.text,
+          element.textMessage,
           textAlign: uid == element.user ? TextAlign.right : TextAlign.left,
         ),
       ),
