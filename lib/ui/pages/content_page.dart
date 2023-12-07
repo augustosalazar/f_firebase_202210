@@ -1,5 +1,4 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:f_firebase_202210/ui/widgets/simple_firestore_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -19,7 +18,6 @@ class _ContentPageState extends State<ContentPage> {
   int _selectIndex = 0;
   AuthenticationController authenticationController = Get.find();
   static final List<Widget> _widgets = <Widget>[
-    const SimpleFireStorePage(),
     const ChatPage(),
     const UserListPage()
   ];
@@ -58,11 +56,6 @@ class _ContentPageState extends State<ContentPage> {
         items: const <Widget>[
           Icon(
             Icons.home,
-            size: 35,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.business,
             size: 35,
             color: Colors.white,
           ),
