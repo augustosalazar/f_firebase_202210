@@ -1,38 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:loggy/loggy.dart';
 
 import '../model/message.dart';
+import 'i_chat_data_source.dart';
 
-class FirestoreChatDataSource {
+class FirestoreChatDataSource with UiLoggy implements IChatDataSource {
   final FirebaseFirestore _firestore;
 
-  FirestoreChatDataSource(this._firestore);
+  FirestoreChatDataSource() : _firestore = FirebaseFirestore.instance;
 
-  // implement getChats that returns a Stream<List<Chat>>
-  Stream<List<Message>> getChats() {
-    return _firestore
-        .collection('chats')
-        .orderBy('timestamp', descending: true)
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => Message.FromFirestore(doc)).toList());
+  @override
+  Stream<List<Message>> getChatMessages() {
+    return _firestore.collection('chats').snapshots().map((event) {
+      return event.docs
+          .map((record) => Message.FromFirestore(record.data()))
+          .toList();
+    });
   }
 
-  Future<void> sendMessage(String chatId, Message message) async {
+  @override
+  Future<void> addChatMessage(Message message) async {
+    loggy.info('firestore addChatMessage with text ${message.textMessage}');
+    final newPostKey = _firestore.collection('chats').doc().id;
+    message.key = newPostKey;
+    await _firestore.collection('chats').doc(newPostKey).set(message.toJson());
+  }
+
+  @override
+  Future<void> deleteMsg(Message chat) async {
+    loggy.info('firestore deleteMsg with key ${chat.key}');
+    await _firestore.collection('chats').doc(chat.key).delete();
+  }
+
+  @override
+  Future<void> updateMsg(Message message) async {
+    loggy.info(
+        'firestore updateMsg with key ${message.key} and text ${message.textMessage}');
     await _firestore
         .collection('chats')
-        .doc(chatId)
-        .collection('messages')
-        .add(message.toJson());
-  }
-
-  Stream<List<Message>> getMessages(String chatId) {
-    return _firestore
-        .collection('chats')
-        .doc(chatId)
-        .collection('messages')
-        .orderBy('timestamp', descending: true)
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => Message.FromFirestore(doc)).toList());
+        .doc(message.key)
+        .update(message.toJson());
   }
 }

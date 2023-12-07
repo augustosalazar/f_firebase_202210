@@ -10,10 +10,10 @@ class Message {
 
   Message({required this.textMessage, required this.user});
 
-  Message.FromFirestore(QueryDocumentSnapshot<Object?> snapshot)
-      : key = snapshot.id,
-        user = snapshot['uid'] ?? "uid",
-        textMessage = snapshot['text'] ?? "text";
+  Message.FromFirestore(Map<String, dynamic> record)
+      : key = record['key'] ?? "0",
+        user = record['uid'] ?? "uid",
+        textMessage = record['text'] ?? "text";
 
   Message.fromJson(Map<dynamic, dynamic> json)
       : key = json['key'] ?? "0",

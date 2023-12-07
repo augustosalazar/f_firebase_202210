@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 
 import '../model/message.dart';
+import 'i_chat_data_source.dart';
 
-class FirebaseRealTimeDatabaseDataSource {
+class FirebaseRealTimeDatabaseDataSource implements IChatDataSource {
   final _firebaseDatabase = FirebaseDatabase.instance.ref();
 
-  FirebaseRealTimeDatabaseDataSource();
-
+  @override
   Stream<List<Message>> getChatMessages() {
     return _firebaseDatabase
         .child('msg')
@@ -19,7 +19,7 @@ class FirebaseRealTimeDatabaseDataSource {
           if (event.snapshot.value is Map) {
             return Map<String, dynamic>.from(event.snapshot.value as Map);
           } else {
-            print('Error getChatMessages');
+            logError('Error getChatMessages');
             throw TypeError();
           }
         })
@@ -38,14 +38,7 @@ class FirebaseRealTimeDatabaseDataSource {
     ;
   }
 
-  // Future<List<Message>> getChatMessages() async {
-  //   final snapshot = await _firebaseDatabase.ref().child('chat').once();
-  //   final messages = snapshot.value as Map<String, dynamic>;
-  //   return messages.entries
-  //       .map((entry) => Message.fromJson(entry.value))
-  //       .toList();
-  // }
-
+  @override
   Future<void> addChatMessage(Message message) async {
     final newPostKey = _firebaseDatabase.child('msg').push().key;
 
@@ -58,6 +51,7 @@ class FirebaseRealTimeDatabaseDataSource {
   }
 
   // implement updateMsg that updates a message in the database
+  @override
   Future<void> updateMsg(Message message) async {
     logInfo(
         'updateMsg with key ${message.key} and text ${message.textMessage}');
@@ -68,6 +62,7 @@ class FirebaseRealTimeDatabaseDataSource {
   }
 
   // implement deleteMsg that deletes a message from the database
+  @override
   Future<void> deleteMsg(Message message) async {
     logInfo('deleteMsg with key ${message.key}');
     await _firebaseDatabase.child('msg').child(message.key!).remove();
