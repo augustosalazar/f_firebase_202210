@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prompt_dialog/prompt_dialog.dart';
 
-import '../../data/model/record.dart';
-import '../controllers/firestore_controller.dart';
+import '../../data/model/document.dart';
+import '../controllers/simple_firestore_controller.dart';
 
-class FireStorePage extends StatefulWidget {
-  const FireStorePage({Key? key}) : super(key: key);
+class SimpleFireStorePage extends StatefulWidget {
+  const SimpleFireStorePage({super.key});
 
   @override
-  State<FireStorePage> createState() => _FireStorePageState();
+  State<SimpleFireStorePage> createState() => _SimpleFireStorePageState();
 }
 
-class _FireStorePageState extends State<FireStorePage> {
-  final FirestoreController firestoreController = Get.find();
+class _SimpleFireStorePageState extends State<SimpleFireStorePage> {
+  final SimpleFirestoreController firestoreController = Get.find();
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _FireStorePageState extends State<FireStorePage> {
         ));
   }
 
-  Widget _buildItem(BuildContext context, Record record) {
+  Widget _buildItem(BuildContext context, Document record) {
     return Padding(
       key: ValueKey(record.name),
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -58,8 +58,8 @@ class _FireStorePageState extends State<FireStorePage> {
         child: ListTile(
           title: Text(record.name),
           trailing: Text(record.votes.toString()),
-          onTap: () => firestoreController.updateEntry(record),
-          onLongPress: () => firestoreController.deleteEntry(record),
+          onTap: () => firestoreController.updateDocument(record),
+          onLongPress: () => firestoreController.deleteDocument(record),
         ),
       ),
     );
@@ -67,7 +67,7 @@ class _FireStorePageState extends State<FireStorePage> {
 
   Future<void> addBaby(BuildContext context) async {
     getName(context).then((value) {
-      firestoreController.addEntry(value);
+      firestoreController.addDocument(value);
     });
   }
 

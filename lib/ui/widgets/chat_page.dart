@@ -7,7 +7,7 @@ import '../controllers/authentication_controller.dart';
 import '../controllers/chat_controller.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  const ChatPage({super.key});
 
   @override
   _ChatPageState createState() => _ChatPageState();

@@ -1,9 +1,8 @@
 import 'package:f_firebase_202210/data/model/message.dart';
-
-import '../../data/repositories/chat_reposity.dart';
+import '../repositories/i_chat_reposity.dart';
 
 class ChatUseCase {
-  final ChatRepository _chatRepository;
+  final IChatRepository _chatRepository;
 
   ChatUseCase(this._chatRepository);
 

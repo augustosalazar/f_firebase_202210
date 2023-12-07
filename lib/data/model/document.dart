@@ -1,8 +1,12 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Record {
-  String name = "";
-  int votes = 0;
+class Document {
+  String? key;
+  String name;
+  int votes;
+
+  Document({required this.name, required this.votes});
+
   // final DocumentReference reference;
 
   // Record.fromMap(Map<String, dynamic> map, {required this.reference})
@@ -17,4 +21,12 @@ class Record {
 
   @override
   String toString() => "Record<$name:$votes>";
+
+  Map<String, dynamic> toJson() {
+    return {
+      "key": key,
+      "name": name,
+      "votes": votes,
+    };
+  }
 }

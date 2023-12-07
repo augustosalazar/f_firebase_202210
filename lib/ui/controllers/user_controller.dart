@@ -6,7 +6,7 @@ import 'package:loggy/loggy.dart';
 import '../../data/model/app_user.dart';
 
 class UserController extends GetxController {
-  var _users = <AppUser>[].obs;
+  final _users = <AppUser>[].obs;
 
   final databaseRef = FirebaseDatabase.instance.ref();
 

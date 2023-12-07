@@ -1,5 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:f_firebase_202210/ui/widgets/firestore_page.dart';
+import 'package:f_firebase_202210/ui/widgets/simple_firestore_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -9,7 +9,7 @@ import '../widgets/chat_page.dart';
 import '../widgets/user_list_page.dart';
 
 class ContentPage extends StatefulWidget {
-  const ContentPage({Key? key}) : super(key: key);
+  const ContentPage({super.key});
 
   @override
   _ContentPageState createState() => _ContentPageState();
@@ -19,7 +19,7 @@ class _ContentPageState extends State<ContentPage> {
   int _selectIndex = 0;
   AuthenticationController authenticationController = Get.find();
   static final List<Widget> _widgets = <Widget>[
-    const FireStorePage(),
+    const SimpleFireStorePage(),
     const ChatPage(),
     const UserListPage()
   ];

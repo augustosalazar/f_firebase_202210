@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:f_firebase_202210/domain/use_cases/chat_use_case.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 

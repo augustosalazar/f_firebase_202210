@@ -4,19 +4,18 @@ import 'package:f_firebase_202210/domain/use_cases/chat_use_case.dart';
 import 'package:f_firebase_202210/ui/firebase_cental.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../data/data_source/firebase_real_time_database_chat_data_source.dart';
 import '../data/repositories/chat_reposity.dart';
 import 'controllers/authentication_controller.dart';
 import 'controllers/chat_controller.dart';
-import 'controllers/firestore_controller.dart';
+import 'controllers/simple_firestore_controller.dart';
 import 'controllers/user_controller.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(FirestoreController());
+    Get.put(SimpleFirestoreController());
     //Get.put<IChatDataSource>(FirebaseRealTimeDatabaseDataSource());
     Get.put<IChatDataSource>(FirestoreChatDataSource());
     Get.put(ChatRepository(Get.find()));

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../data/model/app_user.dart';
 
 class UserListPage extends StatefulWidget {
-  const UserListPage({Key? key}) : super(key: key);
+  const UserListPage({super.key});
 
   @override
   State<UserListPage> createState() => _UserListPageState();
