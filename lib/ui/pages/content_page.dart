@@ -11,7 +11,7 @@ class ContentPage extends StatefulWidget {
   const ContentPage({super.key});
 
   @override
-  _ContentPageState createState() => _ContentPageState();
+  State<ContentPage> createState() => _ContentPageState();
 }
 
 class _ContentPageState extends State<ContentPage> {

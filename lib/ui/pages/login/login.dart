@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../controllers/authentication_controller.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({super.key});
   final AuthenticationController authenticationController = Get.find();
 
   void signIn() async {

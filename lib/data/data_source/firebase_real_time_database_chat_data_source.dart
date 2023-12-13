@@ -6,7 +6,7 @@ import 'package:loggy/loggy.dart';
 import '../model/message.dart';
 import 'i_chat_data_source.dart';
 
-class FirebaseRealTimeDatabaseDataSource implements IChatDataSource {
+class FirebaseRealTimeDatabaseChatDataSource implements IChatDataSource {
   final _firebaseDatabase = FirebaseDatabase.instance.ref();
 
   @override
@@ -34,7 +34,6 @@ class FirebaseRealTimeDatabaseDataSource implements IChatDataSource {
             sink.add([]);
           },
         ));
-    ;
   }
 
   @override

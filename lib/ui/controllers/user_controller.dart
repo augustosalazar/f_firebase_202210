@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:f_firebase_202210/domain/use_cases/user_use_case.dart';
 import 'package:f_firebase_202210/ui/controllers/authentication_controller.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:loggy/loggy.dart';
 import '../../data/model/app_user.dart';
 
 class UserController extends GetxController {
+  UserUsecase userDataSource = Get.find();
   final _users = <AppUser>[].obs;
 
   final databaseRef = FirebaseDatabase.instance.ref();
@@ -26,31 +28,37 @@ class UserController extends GetxController {
   void start() {
     _users.clear();
 
-    newEntryStreamSubscription =
-        databaseRef.child("userList").onChildAdded.listen(_onEntryAdded);
+    userDataSource.getUsers().listen((event) {
+      logInfo(
+          "got new list of messages from firebase of length ${event.length}");
+      _users.value = event;
+    });
 
-    updateEntryStreamSubscription =
-        databaseRef.child("userList").onChildChanged.listen(_onEntryChanged);
+    // newEntryStreamSubscription =
+    //     databaseRef.child("userList").onChildAdded.listen(_onEntryAdded);
+
+    // updateEntryStreamSubscription =
+    //     databaseRef.child("userList").onChildChanged.listen(_onEntryChanged);
   }
 
   void stop() {
-    newEntryStreamSubscription.cancel();
-    updateEntryStreamSubscription.cancel();
+    // newEntryStreamSubscription.cancel();
+    // updateEntryStreamSubscription.cancel();
   }
 
-  _onEntryAdded(DatabaseEvent event) {
-    final json = event.snapshot.value as Map<dynamic, dynamic>;
-    _users.add(AppUser.fromJson(event.snapshot, json));
-  }
+  // _onEntryAdded(DatabaseEvent event) {
+  //   final json = event.snapshot.value as Map<dynamic, dynamic>;
+  //   _users.add(AppUser.fromJson(event.snapshot, json));
+  // }
 
-  _onEntryChanged(DatabaseEvent event) {
-    var oldEntry = _users.singleWhere((entry) {
-      return entry.key == event.snapshot.key;
-    });
+  // _onEntryChanged(DatabaseEvent event) {
+  //   var oldEntry = _users.singleWhere((entry) {
+  //     return entry.key == event.snapshot.key;
+  //   });
 
-    final json = event.snapshot.value as Map<dynamic, dynamic>;
-    _users[_users.indexOf(oldEntry)] = AppUser.fromJson(event.snapshot, json);
-  }
+  //   final json = event.snapshot.value as Map<dynamic, dynamic>;
+  //   _users[_users.indexOf(oldEntry)] = AppUser.fromJson(event.snapshot, json);
+  // }
 
   Future<void> createUser(email, uid) async {
     logInfo("Creating user in realTime for $email and $uid");

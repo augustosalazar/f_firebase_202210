@@ -1,5 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
-
 class AppUser {
   String? key;
   String email;
@@ -7,8 +5,8 @@ class AppUser {
 
   AppUser(this.key, this.email, this.uid);
 
-  AppUser.fromJson(DataSnapshot snapshot, Map<dynamic, dynamic> json)
-      : key = snapshot.key ?? "0",
+  AppUser.fromJson(Map<dynamic, dynamic> json)
+      : key = json['key'] ?? "0",
         email = json['email'] ?? "email",
         uid = json['uid'] ?? "uid";
 

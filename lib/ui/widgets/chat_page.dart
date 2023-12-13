@@ -10,7 +10,7 @@ class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
   @override
-  _ChatPageState createState() => _ChatPageState();
+  State<ChatPage> createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> {
@@ -55,7 +55,7 @@ class _ChatPageState extends State<ChatPage> {
     String uid = authenticationController.getUid();
     logInfo('Current user $uid');
     return GetX<ChatController>(builder: (controller) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) => _scrollToEnd());
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToEnd());
       return ListView.builder(
         itemCount: chatController.messages.length,
         controller: _scrollController,
@@ -112,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => _scrollToEnd());
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToEnd());
     return Padding(
       padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 25.0),
       child: Column(
