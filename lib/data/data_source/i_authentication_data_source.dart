@@ -1,5 +1,5 @@
 abstract class IAuthenticationDataSource {
-  Future<void> signIn(String email, String password);
+  Future<String> signIn(String email, String password);
 
   Future<void> signOut();
 

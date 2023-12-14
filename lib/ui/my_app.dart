@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
     Get.put(UserController());
 
     Get.put<IAuthenticationDataSource>(FirebaseAuthenticationDataSource());
-    Get.put<IAuthenticationRepository>(AuthenticationRepository(Get.find()));
+    Get.put<IAuthenticationRepository>(
+        AuthenticationRepository(Get.find(), Get.find()));
     Get.put(AuthenticationUseCase(Get.find()));
     Get.put(AuthenticationController());
 

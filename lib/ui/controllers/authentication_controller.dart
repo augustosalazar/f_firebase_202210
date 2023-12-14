@@ -1,7 +1,4 @@
 import 'package:f_firebase_202210/domain/use_cases/authentication_use_case.dart';
-import 'package:f_firebase_202210/ui/controllers/user_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
 class AuthenticationController extends GetxController {

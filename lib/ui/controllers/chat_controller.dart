@@ -10,18 +10,21 @@ import '../../data/model/message.dart';
 class ChatController extends GetxController {
   ChatUseCase chatUseCase = Get.find();
   var messages = <Message>[].obs;
+  late StreamSubscription<List<Message>> streamSubscription;
 
   void start() {
     messages.clear();
 
-    chatUseCase.getChats().listen((event) {
+    streamSubscription = chatUseCase.getChats().listen((event) {
       logInfo(
           "got new list of messages from firebase of length ${event.length}");
       messages.value = event;
     });
   }
 
-  void stop() {}
+  void stop() async {
+    streamSubscription.cancel();
+  }
 
   Future<void> updateMsg(Message element) async {
     logInfo('controller updateMsg with key ${element.key}');
